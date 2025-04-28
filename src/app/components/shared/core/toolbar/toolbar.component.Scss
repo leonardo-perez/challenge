@@ -1,0 +1,14 @@
+.toolbar{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 10px 0px;
+    .icon-button{
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        background-color: #FFFFFF;
+        border: 1px solid #9E9E9E;
+        margin-left: 5px;
+    }
+}

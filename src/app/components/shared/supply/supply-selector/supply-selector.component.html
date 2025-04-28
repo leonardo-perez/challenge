@@ -1,0 +1,72 @@
+<div class="account" [ngClass]="{'show-supply': showListSupply}" >
+    <div class="account-header">
+        <div class="info">
+            <div class="title">{{account.address}}</div>
+            <div class="details">
+                <div>{{account.alias}}</div> 
+                <span class="separator">|</span>
+                <div>{{account.alias}}</div>
+            </div>
+            <div class="tags">
+                @for (tag of account.tags; track tag) {
+                    <div class="tag">
+                        <img src="arrow-up.svg" alt="">
+                        {{tag}}</div>
+                }
+            </div>
+        </div>
+        <div class="action">
+            <div class="container-button-config">
+                <button class="icon-button config" (click)="showListOptions = !showListOptions"><img src="setting.svg" alt=""></button>
+                @if(showListOptions){
+                    <ng-container *ngTemplateOutlet="optionTemplate" ></ng-container>
+                }
+            </div>
+            <button class="icon-button down"   (click)="showListSupply = !showListSupply"><img src="angle-down.svg" alt=""></button>
+        </div>
+    </div>
+
+    <div class="account-body" [ngClass]="{'singular':account.supplies.length == 1 || account.supplies.length > 3 }" >
+        @if(account.supplies.length < 4){
+            @for (supply of account.supplies; track supply.id) {
+                <app-supply [supply]="supply"></app-supply>
+            }
+        }
+        @else{
+            <app-supply-search [supplies]="account.supplies"></app-supply-search>
+        }
+    </div>
+</div>
+@if (showPopupDelete) {
+    <app-supply-popup-confirm-delete (confirmDelete)="confimrDelete($event)"></app-supply-popup-confirm-delete>
+}
+
+<ng-template #optionTemplate>
+    <div class="options">
+        <div class="header-title">Opciones del suministro</div>
+        <button class="icon-button close" (click)="showListOptions = !showListOptions"><img src="close.svg" alt=""></button>
+        <div>
+            <div class="options-buttons" (click)="showListOptions = !showListOptions">
+                <span class="edit">
+                    <img src="pencil-square.svg" alt="">
+                </span>
+                <div class="text">
+                    <div class="title">Editar alias</div>
+                </div>
+            </div>
+
+            <div class="options-buttons" (click)="askToDelete()" >
+                <span class="danger">
+                    <img src="escape.svg" alt="">
+                </span>
+                
+                <div class="text">
+                    <div class="title">Desvincular suministro</div>
+                    <div class="info">
+                        Esta acción eliminará la conexión entre el suministro y tu cuenta.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

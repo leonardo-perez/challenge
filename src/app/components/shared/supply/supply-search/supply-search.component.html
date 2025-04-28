@@ -1,0 +1,36 @@
+<div class="search-container">
+    <div class="title">Encontrá más rápido</div>
+    <div class="text">Hemos reemplazado las tarjetas por un buscador para facilitar la selección cuando hay más de 2 suministros. </div>
+    
+    <div class="contaienr-input">
+            <form [formGroup]="searchForm" class="search-form">
+            <input type="text" formControlName="searchInput" placeholder="Buscar suministro asociado">
+        </form>
+            
+            @if(filteredSupplies.length){
+                <div class="results">
+                    <div class="header-text">
+                        Lista de suministros asociados a tu cuenta
+                    </div>
+
+                    <div class="list">
+                        @for (item of filteredSupplies; track item) {
+                            <div class="item-found">
+                                <div class="address" [appHighlight]="item.address" [searchTerm]="currentSearchTerm"></div>
+                                <div class="info">
+                                    NIS: <span [appHighlight]="item.nis" [searchTerm]="currentSearchTerm"></span> | Alias: <span [appHighlight]="item.alias" [searchTerm]="currentSearchTerm"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="footer">
+                        <button class="icon-button">Ver los suministros asociados <img src="arrow-right.svg" alt=""></button>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+</div>

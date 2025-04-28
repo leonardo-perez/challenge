@@ -1,0 +1,192 @@
+.account{
+    background-color: #D1E3FF;
+    min-height: 154px;
+    width: 100%;
+    border-radius: 24px;
+    margin-bottom: 24px;
+    font-family: 'Poppins', sans-serif;
+
+
+    .account-header{
+        background-color: white;
+        display: flex;
+        height: 154px;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        border-radius: 24px;
+
+        .info{
+            .title{
+                font-size: 30px;
+                font-weight: 400;
+                letter-spacing: 8%;
+                color: #000;
+            }
+            .details{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 16px;
+                font-weight: 400;
+                letter-spacing: 8%;
+                color: #000;
+            }
+            .tags{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                .tag{
+                    display: flex;
+                    align-items: center;
+                    background-color: #F2F2F2;
+                    height: 25px;
+                    margin: 10px 10px 0px 0px;
+                    padding: 10px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    min-width: 60px;
+                }
+            }
+            
+        }
+
+        .action{
+            display: flex;
+            .icon-button{
+                height: 64px;
+                width: 64px;
+
+                &.down{
+                    background-color: #d1e3ff;
+                    border-radius: 100%;
+                    transition: all ease 0.6s;
+                }
+            }
+            .container-button-config{
+               position: relative;
+
+               .options{
+                position: absolute;
+                bottom: -220px;
+                right: 20px;
+                 background-color: #FFFFFF;
+                 height: 230px;
+                 width: 350px;
+                 z-index: 999;
+                 border: solid 1px #dddddd;
+                 border-radius: 15px;
+                 padding: 15px;
+
+                 .header-title{
+                    font-size: 14px;
+                    color: #5c5c5c;
+                    margin-bottom: 15px;
+                 }
+                 .close{
+                    position: absolute;
+                    right: 0px;
+                    top: -5px;
+                    img{
+                        width: 30px;
+                        height: 30px;
+                    }
+                 }
+                 .options-buttons{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    padding: 15px 0px;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: #f5f5f5;
+                    }
+
+                    .edit{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 100%;
+                        background-color: #e3f7ff;
+                        margin-right: 10px;
+                        img{
+                            width: 20px;
+                        }
+                    }
+
+                    .danger{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 10px;
+                        background-color: #d92d20;
+                        margin-right: 10px;
+                        img{
+                            width: 20px;
+                        }
+                    }
+
+                    .text{
+                        width: 270px;
+                        .title{
+                            font-weight: 600;
+                            font-size: 14px;
+                        }
+                        .info{
+                            font-size: 12px;
+                            color: #5c5c5c;
+                        }
+
+                    }
+                 }
+               }
+
+            }
+        }  
+        
+       
+    }
+
+    .account-body{
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 20px;
+        box-sizing: border-box;
+        height: 0px;
+        overflow: hidden;
+        transition: all ease 0.6s;
+
+        &.singular{
+            display: block;
+            app-supply{
+                width: 100% ;
+            }
+        }
+    }
+
+    &.show-supply{
+        .account-header{
+            border-radius: 24px 24px 0px 0px;
+
+            .action{
+        
+                    .down{
+                      
+                        transform: rotate(180deg);
+                    }
+            }  
+        }
+        .account-body{
+            overflow: visible;
+            padding: 20px;
+            height: auto;
+        }
+
+       
+    }
+}

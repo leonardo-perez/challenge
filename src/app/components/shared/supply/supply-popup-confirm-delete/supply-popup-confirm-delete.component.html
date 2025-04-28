@@ -1,0 +1,18 @@
+<div class="background-popup">
+    <div class="popup">
+        <div class="icon">
+            <img src="exclamation-circle.svg" alt="">
+        </div>
+        <div class="text-title">Desvincular suministros</div>
+        <div class="text">
+            ¿Estás seguro de que queres desvincular este suministro?
+            <br>
+            <br>
+            Esta acción eliminará la conexión entre el suministro y tu cuenta. No podrás acceder a la información o gestionar este suministro desde tu cuenta despues de desvincularlo.
+        </div>
+        <div class="action">
+            <button class="reject" (click)="confirm(false)">Cancelar</button>
+            <button class="success" (click)="confirm(true)" >Desvincular</button>
+        </div>
+    </div>
+</div>

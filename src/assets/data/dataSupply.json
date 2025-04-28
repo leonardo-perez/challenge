@@ -1,0 +1,58 @@
+{
+    "id": 1,
+    "address": "Av. Corrientes 1234",
+    "nis": "123456789",
+    "alias": "Casa Principal",
+    "tags": ["hogar", "principal"],
+    "supplies": [
+        {
+            "id": 1,
+            "address": "Av. Santa Fe 1234",
+            "location": "Piso 1, Dpto A",
+            "alias": "Suministro Principal",
+            "nis": "987654321"
+        },
+        {
+            "id": 2,
+            "address": "Av. Corrientes 1234",
+            "location": "Piso 2, Dpto B",
+            "alias": "Suministro Secundario",
+            "nis": "987654322"
+        },
+        {
+            "id": 3,
+            "address": "Av. Cordoba 1234",
+            "location": "Local Comercial",
+            "alias": "Local 1",
+            "nis": "987654323"
+        },
+        {
+            "id": 4,
+            "address": "Av. Pelegrini 1234",
+            "location": "Piso 3, Dpto C",
+            "alias": "Departamento Alquiler",
+            "nis": "987654324"
+        },
+        {
+            "id": 5,
+            "address": "Av. Cordoba 534",
+            "location": "Piso 4, Dpto D",
+            "alias": "Oficina",
+            "nis": "987654325"
+        },
+        {
+            "id": 6,
+            "address": "Av. Corrientes 1234",
+            "location": "Piso 5, Dpto E",
+            "alias": "Estudio",
+            "nis": "987654326"
+        },
+        {
+            "id": 7,
+            "address": "Av. Corrientes 1234",
+            "location": "Piso 6, Dpto F",
+            "alias": "Consultorio",
+            "nis": "987654327"
+        }
+    ]
+} 
