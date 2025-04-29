@@ -17,7 +17,19 @@ describe('SupplyPopupConfirmDeleteComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('crear el componente', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('emitir evento de confirmacion del popup', () => {
+    const spy = jest.spyOn(component.confirmDelete, 'emit');
+    component.confirm(true);
+    expect(spy).toHaveBeenCalledWith(true);
+  });
+
+  it('emitir evento de cancelacion del popup', () => {
+    const spy = jest.spyOn(component.confirmDelete, 'emit');
+    component.confirm(false);
+    expect(spy).toHaveBeenCalledWith(false);
   });
 });
