@@ -5,7 +5,7 @@ import { ToolbarComponent } from '../../components/shared/core/toolbar/toolbar.c
 import { SupplySelectorComponent } from '../../components/shared/supply/supply-selector/supply-selector.component';
 import { SupplyDataService } from '../../services/supply-data.service';
 import { of } from 'rxjs';
-import { Account } from '../../models/supplies.model';
+import { Supply } from '../../models/supply.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ServiceComponent', () => {
@@ -13,14 +13,26 @@ describe('ServiceComponent', () => {
   let fixture: ComponentFixture<ServiceComponent>;
   let supplyDataService: SupplyDataService;
 
-  const mockAccount: Account = {
-    id: 1,
-    address: 'Calle Principal 123',
-    nis: 123456789,
-    alias: 'Casa Principal',
-    tags: ['hogar'],
-    supplies: []
-  };
+  const mockSupplies: Supply[] = [
+    {
+      id: 1,
+      address: 'Calle Principal 123',
+      nis: '123456789',
+      location: 'Rosario',
+      tags: ['hogar'],
+      alias: 'Casa Principal',
+      disabled: false
+    },
+    {
+      id: 2,
+      address: 'Avenida Secundaria 456',
+      nis: '987654321',
+      location: 'Buenos Aires',
+      tags: ['comercial'],
+      alias: 'Oficina',
+      disabled: false
+    }
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,8 +52,7 @@ describe('ServiceComponent', () => {
     component = fixture.componentInstance;
     supplyDataService = TestBed.inject(SupplyDataService);
     
-    // Mock del método getSupplyData
-    jest.spyOn(supplyDataService, 'getSupplyData').mockReturnValue(of(mockAccount));
+    jest.spyOn(supplyDataService, 'getSupplyData').mockReturnValue(of(mockSupplies));
     
     fixture.detectChanges();
   });
@@ -50,15 +61,30 @@ describe('ServiceComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('cargar datos de suministro', () => {
+  it('cargar datos de suministro al iniciar', () => {
     component.ngOnInit();
     expect(supplyDataService.getSupplyData).toHaveBeenCalled();
-    expect(component.accounts).toEqual(mockAccount);
+    expect(component.suppliesLoaded).toBeTruthy();
   });
 
-  it('actualizar accounts cuando se obtienen datos del servicio', () => {
-    component.getDataSupply();
-    expect(supplyDataService.getSupplyData).toHaveBeenCalled();
-    expect(component.accounts).toEqual(mockAccount);
+  it('suscribirse a cambios en dataSupplies$', () => {
+    const spy = jest.spyOn(supplyDataService.dataSupplies$, 'subscribe');
+    component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('actualizar supplies cuando dataSupplies$ emite nuevos datos', () => {
+    const newSupplies: Supply[] = [...mockSupplies, {
+      id: 3,
+      address: 'Calle Nueva 789',
+      nis: '456789123',
+      location: 'Córdoba',
+      tags: ['nuevo'],
+      alias: 'Nueva Casa',
+      disabled: false
+    }];
+    
+    supplyDataService.dataSupplies$.next(newSupplies);
+    expect(component.Supplies).toEqual(newSupplies);
   });
 });

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SupplyComponent } from './supply.component';
 import { CommonModule } from '@angular/common';
-import { Supply } from '../../../../models/supplies.model';
+import { Supply } from '../../../../models/supply.model';
 
 describe('SupplyComponent', () => {
   let component: SupplyComponent;
@@ -12,7 +12,9 @@ describe('SupplyComponent', () => {
     address: 'Calle Principal 123',
     nis: '123456789',
     location: 'Ciudad A',
-    alias: 'Casa Principal'
+    tags: ['hogar', 'principal'],
+    alias: 'Casa Principal',
+    disabled: false
   };
 
   beforeEach(async () => {
