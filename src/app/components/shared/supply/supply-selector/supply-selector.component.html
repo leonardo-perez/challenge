@@ -1,45 +1,62 @@
-<div class="account" [ngClass]="{'show-supply': showListSupply}" >
-    <div class="account-header">
-        <div class="info">
-            <div class="title">{{account.address}}</div>
-            <div class="details">
-                <div>{{account.alias}}</div> 
-                <span class="separator">|</span>
-                <div>{{account.alias}}</div>
-            </div>
-            <div class="tags">
-                @for (tag of account.tags; track tag) {
-                    <div class="tag">
-                        <img src="arrow-up.svg" alt="">
-                        {{tag}}</div>
-                }
-            </div>
-        </div>
-        <div class="action">
-            <div class="container-button-config">
-                <button class="icon-button config" (click)="showListOptions = !showListOptions"><img src="setting.svg" alt=""></button>
-                @if(showListOptions){
-                    <ng-container *ngTemplateOutlet="optionTemplate" ></ng-container>
-                }
-            </div>
-            <button class="icon-button down"   (click)="showListSupply = !showListSupply"><img src="angle-down.svg" alt=""></button>
-        </div>
-    </div>
 
-    <div class="account-body" [ngClass]="{'singular':account.supplies.length == 1 || account.supplies.length > 3 }" >
-        @if(account.supplies.length < 4){
-            @for (supply of account.supplies; track supply.id) {
-                <app-supply [supply]="supply"></app-supply>
+@if(supplies.length > 0){
+    <div class="account" [ngClass]="{'show-supply': showListSupply && supplies.length > 1}" >
+        <div class="account-header" [ngClass]="{'disabled': supplySelected.disabled}" >
+            <div class="info">
+                <div class="title">{{supplySelected.address}}</div>
+                <div class="details">
+                    <div>NIS: {{supplySelected.alias}}  <span class="separator">|</span> Alias: {{supplySelected.alias}} </div> 
+                   
+                </div>
+                <div class="tags">
+                    @for (tag of supplySelected.tags; track tag) {
+                        <div class="tag">
+                            <img src="arrow-up.svg" alt="">
+                            {{tag}}</div>
+                    }
+                </div>
+            </div>
+            <div class="action">
+                <div class="container-button-config">
+                    <div class="container-option-menu" #containerOptionMenu>
+                        <button class="icon-button config" [disabled]="supplySelected.disabled"  (click)="showListOptions = !showListOptions"><img src="setting.svg" alt=""></button>
+                        @if(showListOptions){
+                            <ng-container *ngTemplateOutlet="optionTemplate" ></ng-container>
+                        }
+                    </div>
+                </div>
+                @if(supplies.length > 1){
+                    <button class="icon-button down"   (click)="showListSupply = !showListSupply"><img src="angle-down.svg" alt=""></button>
+                }
+            </div>
+        </div>
+    
+        <div class="account-body" [ngClass]="{'singular':supplies.length == 2 , 'hidden':supplies.length == 1 }" >
+            @if(supplies.length < 4){
+                @for (supply of supplySelectedFiltered; track supply.id) {
+                    <app-supply [supply]="supply" (click)="selectSupply(supply)" ></app-supply>
+                }
             }
-        }
-        @else{
-            <app-supply-search [supplies]="account.supplies"></app-supply-search>
-        }
+            @else{
+                <app-supply-search [supplies]="supplySelectedFiltered" (selectSupply)="selectSupply($event)"></app-supply-search>
+            }
+        </div>
     </div>
-</div>
-@if (showPopupDelete) {
-    <app-supply-popup-confirm-delete (confirmDelete)="confimrDelete($event)"></app-supply-popup-confirm-delete>
+    @if (showPopupDelete) {
+        <app-supply-popup-confirm-delete (confirmDelete)="confimrDelete($event)"></app-supply-popup-confirm-delete>
+    }
 }
+@else{
+    <div class="account empty" >
+        <div class="account-header">
+            <div class="info">
+                <div class="title">Sin suministros asociados actualmente</div>
+                <div class="details">Al momento no hay suministros asociados al usuario</div> 
+            </div>
+        </div>
+    </div>
+}
+
 
 <ng-template #optionTemplate>
     <div class="options">

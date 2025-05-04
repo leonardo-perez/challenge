@@ -40,7 +40,6 @@ describe('SupplySelectorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('mostrar popup de eliminación y ocultar lista de opciones', () => {
     component.askToDelete();
     expect(component.showPopupDelete).toBe(true);

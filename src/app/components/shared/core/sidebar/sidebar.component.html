@@ -1,4 +1,5 @@
-<div class="sidebar">
+
+<div class="sidebar" >
     <div class="sidebar-header">
         <div class="img ">
             <img src="Logo.svg" alt="logo">
@@ -9,14 +10,53 @@
             </button>
         </div>
     </div>
-
     <div class="search">
         <input type="text" [(ngModel)]="search" placeholder="Buscar">
     </div>
 
-    <div class="button-list">
 
+    <div class="button-list">
+        <button class="icon-button menu-button">
+            <img src="home-alt.svg" alt="menu">
+            <div class="menu-button-text">
+                Texto ejemplo
+            </div>
+        </button>
+
+        <div class="title-section">
+            Servicios
+        </div>
+
+        <button class="icon-button menu-button selected">
+            <img src="book-medical.svg" alt="menu">
+            <div class="menu-button-text">
+                Texto ejemplo
+            </div>
+            <img src="angle-down-w.svg" alt="menu">
+        </button>
+        <button class="icon-button menu-button">
+            <img src="building.svg" alt="menu">
+            <div class="menu-button-text">
+                Texto ejemplo
+            </div>
+        </button>
     </div>
     
-    <div class="footer"></div>
+    @if(userData.name){
+        <div class="footer">
+            <div class="text-user">
+                <div class="name-user">
+                    {{userData.name}}
+                </div>
+                <button class="icon-button account-button">
+                    Mi cuenta
+                </button>
+            </div>
+            <div class="button-logout">
+                <button class="icon-button" (click)="logout()">
+                    <img src="logout-line.svg" alt="menu">
+                </button>
+            </div>
+        </div>
+    }
 </div>

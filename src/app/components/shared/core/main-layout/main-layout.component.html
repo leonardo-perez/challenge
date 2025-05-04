@@ -1,5 +1,11 @@
 <div class="content-layout">
-    <app-sidebar></app-sidebar>
+    <div class="header-mobile">
+        <button class="icon-button" (click)="toggleMenu()">
+            <img src="Navigation.svg" alt="menu">
+        </button>
+        <img src="Logo.svg" alt="logo">
+    </div>
+    <app-sidebar [ngClass]="{'open': isOpenMenu}"></app-sidebar>
     <div class="container-page">
         <div class="content-page">
             <router-outlet></router-outlet>

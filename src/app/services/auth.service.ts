@@ -4,21 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { UserData } from '../models/user.model';
-
-interface LoginResponse {
-    token: string;
-    user: {
-        id: number;
-        email: string;
-        name: string;
-    };
-}
-
-interface User {
-  email: string;
-  password: string;
-  name: string;
-}
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +14,7 @@ export class AuthService {
       private userDataUrl = 'assets/data/userData.json';
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
        
     }
 
@@ -41,6 +27,7 @@ export class AuthService {
         // Limpiar el localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('currentUser');
+        this.router.navigate(['/login']);
        
     }
 
@@ -49,7 +36,7 @@ export class AuthService {
         localStorage.setItem('currentUser', JSON.stringify(userData));
     }
 
-   
-
-  
+    getUserData(): UserData {
+        return JSON.parse(localStorage.getItem('currentUser') || '{}');
+    }  
 } 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ToolbarComponent } from '../../components/shared/core/toolbar/toolbar.component';
-import { Account, Supply } from '../../models/supplies.model';
+import { Supply } from '../../models/supply.model';
 import { SupplySelectorComponent } from '../../components/shared/supply/supply-selector/supply-selector.component';
 import { SupplyDataService } from '../../services/supply-data.service';
 @Component({
@@ -12,18 +12,22 @@ import { SupplyDataService } from '../../services/supply-data.service';
   imports: [CommonModule, ToolbarComponent, SupplySelectorComponent]
 })
 export class ServiceComponent implements OnInit {
-  accounts? : Account | null = null
+  Supplies? : Supply[] | null = null
+  suppliesLoaded : boolean = false
   constructor(
     private supplyDataService : SupplyDataService
   ){}
 
   ngOnInit(): void {
+    this.supplyDataService.dataSupplies$.subscribe((response : Supply[])=>{
+      this.Supplies = response
+    })
     this.getDataSupply()
   }
 
   getDataSupply(){
-    this.supplyDataService.getSupplyData().subscribe((response : Account)=>{
-      this.accounts = response
+    this.supplyDataService.getSupplyData().subscribe((response : Supply[])=>{
+      this.suppliesLoaded = true
     })
   }
 }

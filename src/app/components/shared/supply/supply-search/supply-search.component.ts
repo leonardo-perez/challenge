@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SupplyComponent } from '../supply/supply.component';
-import { Supply } from '../../../../models/supplies.model';
+import { Supply } from '../../../../models/supply.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription, debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { HighlightDirective } from '../../../../directives/highlight.directive';
@@ -12,8 +12,9 @@ import { HighlightDirective } from '../../../../directives/highlight.directive';
   templateUrl: './supply-search.component.html',
   styleUrl: './supply-search.component.scss'
 })
-export class SupplySearchComponent implements OnInit, OnDestroy {
+export class SupplySearchComponent implements OnInit, OnDestroy, OnChanges {
     @Input() supplies: Supply[] = [];
+    @Output() selectSupply: EventEmitter<Supply> = new EventEmitter<Supply>();
     searchForm: FormGroup;
     private subscription: Subscription = new Subscription();
     filteredSupplies: Supply[] = [];
@@ -38,6 +39,12 @@ export class SupplySearchComponent implements OnInit, OnDestroy {
         );
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if(changes['supplies']){
+            this.filteredSupplies = this.filterSupplies(this.currentSearchTerm);
+        }
+    }
+
     private filterSupplies(searchTerm: string): Supply[] {
         if (!searchTerm) {
             return [];
@@ -54,5 +61,16 @@ export class SupplySearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    select(supply: Supply){
+        this.selectSupply.emit(supply);
+        this.clearSearch();
+    }
+    
+    clearSearch(){
+        this.searchForm.get('searchInput')?.setValue('');
+        this.currentSearchTerm = '';
+        this.filteredSupplies = [];
     }
 }

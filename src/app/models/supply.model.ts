@@ -1,5 +1,9 @@
 export interface Supply {
-  address: string;
-  locality: string;
-  alias: string;
-} 
+  id: number,
+  address: string,
+  nis: string,
+  location: string,
+  tags: string[],
+  alias: string,
+  disabled: boolean
+}

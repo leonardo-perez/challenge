@@ -15,7 +15,7 @@
 
                     <div class="list">
                         @for (item of filteredSupplies; track item) {
-                            <div class="item-found">
+                            <div class="item-found" (click)="select(item)">
                                 <div class="address" [appHighlight]="item.address" [searchTerm]="currentSearchTerm"></div>
                                 <div class="info">
                                     NIS: <span [appHighlight]="item.nis" [searchTerm]="currentSearchTerm"></span> | Alias: <span [appHighlight]="item.alias" [searchTerm]="currentSearchTerm"></span>

@@ -1,15 +1,17 @@
-<app-toolbar></app-toolbar>
-
-<div class="supplies-container">
-    <div class="list-container" >
-        @if (accounts) {
-            <app-supply-selector [account]="accounts"></app-supply-selector>
-        }
+@if(suppliesLoaded){
+    <app-toolbar></app-toolbar>
+    
+    <div class="supplies-container">
+        <div class="list-container" >
+            @if (Supplies) {
+                <app-supply-selector [supplies]="Supplies"></app-supply-selector>
+            }
+        </div>
+        <div class="new-button-container">
+            <button class="new-button">
+                <i><img src="Content.svg" alt=""></i>
+                <span>Asociar Suministro</span>
+            </button>
+        </div>
     </div>
-    <div class="new-button-container">
-        <button class="new-button">
-            <i><img src="Content.svg" alt=""></i>
-            <span>Asociar Suministro</span>
-        </button>
-    </div>
-</div>
+}

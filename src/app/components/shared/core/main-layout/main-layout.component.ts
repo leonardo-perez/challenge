@@ -10,5 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './main-layout.component.scss'
 })
 export class MainLayoutComponent {
+  isOpenMenu : boolean = false;
 
+  toggleMenu(){
+    this.isOpenMenu = !this.isOpenMenu;
+  }
 }
